@@ -12,9 +12,9 @@ import android.graphics.Paint
 import android.graphics.Canvas
 import android.graphics.Color
 
-val colors : Array<String> = arrayOf("#3F51B5", "#009688", "#03A9F4", "#F44336", "")
+val colors : Array<String> = arrayOf("#3F51B5", "#009688", "#03A9F4", "#F44336", "#FFEB3B")
 val parts : Int = 3
-val scGap : Float = 0.2f / parts
+val scGap : Float = 0.02f / parts
 val strokeFactor : Float = 90f
 val sizeFactor : Float = 2f
 val lines : Int = 4
@@ -43,11 +43,11 @@ fun Canvas.drawMultiLineSlopper(scale : Float, w : Float, h : Float, paint : Pai
     for (j in 0..(lines - 1)) {
         save()
         translate(xInit + xGap * j, yInit)
-        drawLine(0f, 0f, 0f, yGap * (lines - j) * sf1, paint)
+        drawLine(0f, 0f, 0f, -yGap * (lines - j) * sf1, paint)
         restore()
     }
-    drawLine(xInit, yInit, xInit + wSize * sf2, yInit, paint)
-    drawLine(xInit, yStart, xInit + wSize * sf3, y, paint)
+    drawLine(xInit, yInit, xInit + (wSize - xGap) * sf2, yInit, paint)
+    drawLine(xInit, yStart, xInit + (wSize - xGap) * sf3, y, paint)
 }
 
 fun Canvas.drawMLSNode(i : Int, scale : Float, paint : Paint) {
@@ -137,7 +137,7 @@ class MultiLineSlopperView(ctx : Context) : View(ctx) {
 
         fun addNeighbor() {
             if (i < colors.size - 1) {
-                next = MLSNode(i)
+                next = MLSNode(i + 1)
                 next?.prev = this
             }
         }
