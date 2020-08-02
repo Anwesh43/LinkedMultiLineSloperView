@@ -187,4 +187,27 @@ class MultiLineSlopperView(ctx : Context) : View(ctx) {
             curr.startUpdating(cb)
         }
     }
+
+    data class Renderer(var view : MultiLineSlopperView) {
+
+        private val animator : Animator = Animator(view)
+        private val mls : MultiLineSlopper = MultiLineSlopper(0)
+        private val paint : Paint = Paint(Paint.ANTI_ALIAS_FLAG)
+
+        fun render(canvas : Canvas) {
+            canvas.drawColor(backColor)
+            mls.draw(canvas, paint)
+            animator.animate {
+                mls.update {
+                    animator.stop()
+                }
+            }
+        }
+
+        fun handleTap() {
+            mls.startUpdating {
+                animator.start()
+            }
+        }
+    }
 }
