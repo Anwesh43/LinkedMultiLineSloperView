@@ -60,3 +60,19 @@ fun Canvas.drawMLSNode(i : Int, scale : Float, paint : Paint) {
     drawMultiLineSlopper(scale, w, h, paint)
     restore()
 }
+
+class MultiLineSlopperView(ctx : Context) : View(ctx) {
+
+    override fun onDraw(canvas : Canvas) {
+
+    }
+
+    override fun onTouchEvent(event : MotionEvent) : Boolean {
+        when (event.action) {
+            MotionEvent.ACTION_DOWN -> {
+
+            }
+        }
+        return true
+    }
+}
