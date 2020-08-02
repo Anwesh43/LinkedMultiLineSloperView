@@ -212,4 +212,13 @@ class MultiLineSlopperView(ctx : Context) : View(ctx) {
             }
         }
     }
+
+    companion object {
+
+        fun create(activity : Activity) : MultiLineSlopperView {
+            val view : MultiLineSlopperView = MultiLineSlopperView(activity)
+            activity.setContentView(view)
+            return view
+        }
+    }
 }
